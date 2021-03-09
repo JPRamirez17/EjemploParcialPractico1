@@ -1,0 +1,92 @@
+{
+	"info": {
+		"_postman_id": "6cc7c745-dca9-4341-b55c-3bbf8acfc50f",
+		"name": "MedicoResourceTest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Crear Médico",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"No genera error en el POST\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n      \"nombre\": \"Juan Jose\",\r\n      \"apellido\": \"Rodriguez Ortiz\",\r\n      \"registro\": 21525352,\r\n      \"especialidad\": \"Anestesiología\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_parcial1-api/api/medicos",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_parcial1-api",
+						"api",
+						"medicos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear Médico apellido vacío",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"No crea con administrador null\"] = responseCode.code === 412;\r",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has( \"El médico creado debería tener un apellido\" );"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n      \"nombre\": \"Juan Jose\",\r\n      \"apellido\": \"\",\r\n      \"registro\": 21352,\r\n      \"especialidad\": \"Anestesiología\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_parcial1-api/api/medicos",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_parcial1-api",
+						"api",
+						"medicos"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
